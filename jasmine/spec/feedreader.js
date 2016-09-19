@@ -21,26 +21,41 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
+
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
 
+      //This loops through the items in allFeeds and checks that they are
+      //defined, and that they aren't blank. 
+         function testURL(i, key){
+         it('should have a ' + key + ' defined', function(){
+            expect(allFeeds[i][key]).toBeDefined();
+            expect(allFeeds[i][key]).not.toBe('');
+         });
+     }
+        //This loop checks the length of the URL property of the allFeeds object
+        for (var i = 0; i < allFeeds.length; i++){
+            testURL(i, 'url');
+        }
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
+        //This loop checks the name property of the allFeeds object.
+        for (var i = 0; i < allFeeds.length; i++){
+            testURL(i, 'name')
+        };
+});
 
+    //A test suite for the menu
+    describe('The menu', function(){
+        //Get the body element
+        var menu = document.getElementsByTagName('body')[0];
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
+        it('should have the menu hidden by default', function(){
+            expect(menu.className).toBe('menu-hidden');
+        });
     });
 
-
-    /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
