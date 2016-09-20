@@ -12,7 +12,7 @@ This wasn't a "test driven" implementation. The site was already complete, and t
 
 ###How can I see it? 
 You can fork/clone this repo, then open up `index.html` in a browser of your choosing. 
-Alternatively, I've published this site to GitHub pages right [here](http://jasmine.github.io/2.1/introduction.html).
+Alternatively, I've published this site to GitHub pages right [here](https://bergfulton.github.io/frontend-nanodegree-feedreader/).
 
 ###Who helped?
 Lots of help was had from the Udacity forums, the Jasmine documentation, and [Patrick Fulton](http://www.github.com/pfulton).

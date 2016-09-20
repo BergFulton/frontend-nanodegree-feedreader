@@ -67,12 +67,10 @@ $(function() {
     // This test checks to see that there is at least 1 entry in the .feed container
     // after the loadFeed function is run
     describe ('Initial Entries', function(){
-
         beforeEach(function(done) {
-            setTimeout(function() {
-                value = 0;
+            loadFeed(0, function(){
                 done();
-            }, 1000);
+            });
         });
 
         // Then length of .entry should not be 0
