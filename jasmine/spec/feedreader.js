@@ -27,29 +27,29 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-      //This loops through the items in allFeeds and checks that they are
-      //defined, and that they aren't blank. 
+      // This loops through the items in allFeeds and checks that they are
+      // defined, and that they aren't blank
          function testURL(i, key){
          it('should have a ' + key + ' defined', function(){
             expect(allFeeds[i][key]).toBeDefined();
             expect(allFeeds[i][key]).not.toBe('');
          });
      }
-        //This loop checks the length of the URL property of the allFeeds object
+        // This loop checks the length of the URL property of the allFeeds object
         for (var i = 0; i < allFeeds.length; i++){
             testURL(i, 'url');
         }
 
-        //This loop checks the name property of the allFeeds object.
+        // This loop checks the name property of the allFeeds object.
         for (var i = 0; i < allFeeds.length; i++){
             testURL(i, 'name')
         };
 });
 
-    //A test suite for the menu
+    // A test suite for the menu functionality
     describe('The menu', function(){
         var menuClassList = document.body.classList;
-        //The menu should be hidden by default-check to see that it has class 'menu-hidden' 
+        // The menu should be hidden by default-check to see that it has class 'menu-hidden' 
         it('should have the menu-hidden class by default', function(){
             expect(menuClassList.contains('menu-hidden')).toBe(true);
         });
@@ -64,28 +64,47 @@ $(function() {
         });
     });
 
-
+    // This test checks to see that there is at least 1 entry in the .feed container
+    // after the loadFeed function is run
     describe ('Initial Entries', function(){
-   /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
 
+        beforeEach(function(done) {
+            setTimeout(function() {
+                value = 0;
+                done();
+            }, 1000);
+        });
 
-    });
-
-     
-
-    describe ('New Feed Selection', function(){
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
-
+        // Then length of .entry should not be 0
+        it('Should have at least one entry in the feed container', function(){
+            expect($('.feed .entry').length).toBeGreaterThan(0);
+        })
 
     });
 
+    
+    // This is a test to make sure that new feeds are being loaded after selection. 
+    // It compares the first feed to the newly selected feed. They should be different
+    describe ('New Feed Selection', function() {
+
+        // Variable to be used for the first feed
+        var startFeed;
+
+        // Async requires beforeEach
+        beforeEach(function(done) {
+            loadFeed(1, function(){
+                //assign startFeed the value of the .feed element
+                startFeed = $('.feed').html();
+                done();
+            });
+        });
+
+        it('should change content', function(done){
+            loadFeed(0, function(){
+                //We expect that the new feed will NOT be the same as startFeed
+                expect($('.feed').html()).not.toEqual(startFeed);
+                done();
+            });
+        });
+    });
 }());
