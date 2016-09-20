@@ -84,16 +84,18 @@ $(function() {
 
     
     // This is a test to make sure that new feeds are being loaded after selection. 
-    // It compares the first feed to the newly selected feed. They should be different
+    // It compares the first feed to the newly selected feed. They should be different.
+    // Help with this from https://discussions.udacity.com/t/p6-new-feed-selection-test-question-problem/15562/4
+    // and 
     describe ('New Feed Selection', function() {
 
         // Variable to be used for the first feed
         var startFeed;
 
-        // Async requires beforeEach
+        // Async usage requires beforeEach
         beforeEach(function(done) {
             loadFeed(1, function(){
-                //assign startFeed the value of the .feed element
+                // assign startFeed the value of the .feed element
                 startFeed = $('.feed').html();
                 done();
             });
@@ -101,7 +103,7 @@ $(function() {
 
         it('should change content', function(done){
             loadFeed(0, function(){
-                //We expect that the new feed will NOT be the same as startFeed
+                // expect that the new feed will NOT be the same as startFeed
                 expect($('.feed').html()).not.toEqual(startFeed);
                 done();
             });
