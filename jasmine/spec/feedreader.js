@@ -3,16 +3,15 @@
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
  */
-
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
     /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
+     * a related set of tests. This suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
@@ -27,30 +26,30 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-      // This loops through the items in allFeeds and checks that they are
-      // defined, and that they aren't blank
-         function testURL(i, key){
-         it('should have a ' + key + ' defined', function(){
-            expect(allFeeds[i][key]).toBeDefined();
-            expect(allFeeds[i][key]).not.toBe('');
-         });
-     }
+        // This loops through the items in allFeeds and checks that they are
+        // defined, and that they aren't blank
+        function testURL(i, key) {
+            it('should have a ' + key + ' defined', function() {
+                expect(allFeeds[i][key]).toBeDefined();
+                expect(allFeeds[i][key]).not.toBe('');
+            });
+        }
         // This loop checks the length of the URL property of the allFeeds object
-        for (var i = 0; i < allFeeds.length; i++){
+        for (var i = 0; i < allFeeds.length; i++) {
             testURL(i, 'url');
         }
 
         // This loop checks the name property of the allFeeds object.
-        for (var i = 0; i < allFeeds.length; i++){
-            testURL(i, 'name')
-        };
-});
+        for (var i = 0; i < allFeeds.length; i++) {
+            testURL(i, 'name');
+        }
+    });
 
     // A test suite for the menu functionality
-    describe('The menu', function(){
+    describe('The menu', function() {
         var menuClassList = document.body.classList;
         // The menu should be hidden by default-check to see that it has class 'menu-hidden' 
-        it('should have the menu-hidden class by default', function(){
+        it('should have the menu-hidden class by default', function() {
             expect(menuClassList.contains('menu-hidden')).toBe(true);
         });
 
@@ -66,41 +65,41 @@ $(function() {
 
     // This test checks to see that there is at least 1 entry in the .feed container
     // after the loadFeed function is run
-    describe ('Initial Entries', function(){
+    describe('Initial Entries', function() {
         beforeEach(function(done) {
-            loadFeed(0, function(){
+            loadFeed(0, function() {
                 done();
             });
         });
 
         // Then length of .entry should not be 0
-        it('Should have at least one entry in the feed container', function(){
+        it('Should have at least one entry in the feed container', function() {
             expect($('.feed .entry').length).toBeGreaterThan(0);
-        })
+        });
 
     });
 
-    
+
     // This is a test to make sure that new feeds are being loaded after selection. 
     // It compares the first feed to the newly selected feed. They should be different.
     // Help with this from https://discussions.udacity.com/t/p6-new-feed-selection-test-question-problem/15562/4
     // and 
-    describe ('New Feed Selection', function() {
+    describe('New Feed Selection', function() {
 
         // Variable to be used for the first feed
         var startFeed;
 
         // Async usage requires beforeEach
         beforeEach(function(done) {
-            loadFeed(1, function(){
+            loadFeed(1, function() {
                 // assign startFeed the value of the .feed element
                 startFeed = $('.feed').html();
                 done();
             });
         });
 
-        it('should change content', function(done){
-            loadFeed(0, function(){
+        it('should change content', function(done) {
+            loadFeed(0, function() {
                 // expect that the new feed will NOT be the same as startFeed
                 expect($('.feed').html()).not.toEqual(startFeed);
                 done();
